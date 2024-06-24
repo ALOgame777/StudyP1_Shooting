@@ -68,6 +68,15 @@ public class PlayerMove : MonoBehaviour
         //벡터의 길이를 무조건 1로 바꾼다. Vector의 정규화(Normalize)
         direction.Normalize();
         transform.position += direction * moveSpeed * Time.deltaTime;
-        
+        //transform.eulerAngles += direction * moveSpeed * Time.deltaTime;
+        //transform.localScale += direction * moveSpeed * Time.deltaTime;
+
+        // 특정 키를 입력했을 때 사용하는 함수(Get, GetDown, GetUp)
+        //bool value = Input.GetButton("Horizontal");
+
+        //if(Input.GetKey(KeyCode.F1))
+        //{
+        //    print("F1 키를 눌렀습니다.");
+        //}
     }
 }
