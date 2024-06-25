@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     //플레이어를 원하는 방향으로 이동한다.
-
     public float moveSpeed = 0.1f;
+
     //private Vector3 direction;
 
     #region 속도란?
@@ -56,13 +56,15 @@ public class PlayerMove : MonoBehaviour
     // 매 프레임마다 반복해서 실행하는 함수
     void Update()
     {
+        #region 이동 공식 적용법
         //Vector3 direction = new Vector3(1, 1, 0);
         //transform.position += Vector3.right * moveSpeed;  
         //transform.position += direction * moveSpeed;
         //print(transform.position);
+        #endregion
 
         // 사용자의 입력 받기
-        float h =  Input.GetAxisRaw("Horizontal");
+        float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(h, v, 0);
         //벡터의 길이를 무조건 1로 바꾼다. Vector의 정규화(Normalize)
@@ -71,6 +73,7 @@ public class PlayerMove : MonoBehaviour
         //transform.eulerAngles += direction * moveSpeed * Time.deltaTime;
         //transform.localScale += direction * moveSpeed * Time.deltaTime;
 
+        #region 사용자의 키 입력
         // 특정 키를 입력했을 때 사용하는 함수(Get, GetDown, GetUp)
         //bool value = Input.GetButton("Horizontal");
 
@@ -78,5 +81,7 @@ public class PlayerMove : MonoBehaviour
         //{
         //    print("F1 키를 눌렀습니다.");
         //}
+        #endregion
+        
     }
 }
