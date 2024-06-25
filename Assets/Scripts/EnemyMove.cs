@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class EnemyMove : MonoBehaviour
     void Start()
     {
         // 방향 계산을 한번만 실행
+        player = GameObject.FindWithTag("Player");
         dir = player.transform.position - transform.position;
         dir.Normalize();
     }
