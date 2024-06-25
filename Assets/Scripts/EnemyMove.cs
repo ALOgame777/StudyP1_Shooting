@@ -15,7 +15,11 @@ public class EnemyMove : MonoBehaviour
     void Start()
     {
         // 방향 계산을 한번만 실행
-        player = GameObject.FindWithTag("Player");
+        #region 태그로 찾는 방법
+        // 태그로 찾는 방법 1
+        //player = GameObject.FindWithTag("Player");
+        #endregion
+        player = GameObject.FindGameObjectWithTag("Player");
         dir = player.transform.position - transform.position;
         dir.Normalize();
     }
