@@ -5,23 +5,53 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyMove : MonoBehaviour
 {
-    // 아래 방향으로 계속 이동하고 싶다.
-    public int speed;
+    // 지정된 확률에 따라 아래로 또는 플레이어 방향으로 이동 방향을 결정한다.
+    // 확률에 따라 추첨한다. -> 확률 변수, 랜덤 값
 
+    public int speed;
     // 플레이어를 따라가고싶다.
     public GameObject player;
+    public int downrate = 35; //65% 확률로 플레이어를 쫓아감
     Vector3 dir;
-
     void Start()
     {
-        // 방향 계산을 한번만 실행
-        #region 태그로 찾는 방법
-        // 태그로 찾는 방법 1
-        //player = GameObject.FindWithTag("Player");
+        #region Find("Player")
+        // 현재 씬에서 "Player" 라는 이름으로 게임 오브젝트를 찾는다.
+        // 1. 느림 Find("Player")
+        // player = GameObject.Find("Player");
         #endregion
-        player = GameObject.FindGameObjectWithTag("Player");
-        dir = player.transform.position - transform.position;
-        dir.Normalize();
+
+        #region FindObjectsOfType<PlayerMove>();
+        // 2 . FindObjectsOfType
+        // 현재 씬에서 PlayerMove 컴포넌트를 가지고 있는 오브젝트를 찾는다.
+        // 이름으로 찾는 것보다 훨씬 빠르다.
+        // PlayerMove playerComp = FindObjectsOfType<PlayerMove>();
+        // player = playerComp.gameObject;
+        #endregion
+
+        #region GameObject.FindGameObjectWithTag("MyPlayer");
+        // 3. 게임 오브젝트에 설정된 태그 이름으로 게임 오브젝트를 찾는다.
+        player = GameObject.FindGameObjectWithTag("MyPlayer");
+        #endregion
+
+        #region GameObject.FindWithTag("MyPlayer");
+        //player = GameObject.FindWithTag("MyPlayer");
+        #endregion
+
+        // 랜덤한 숫자를 하나 뽑는다. 
+        int myNumber =  Random.Range(0, 100);
+        // 만일, 뽑은 숫자가 35보다 작으면, 방향을 아래로 설정한다.
+        if(myNumber > downrate)
+        {
+            dir = Vector3.down;
+        }
+        // 그렇지 않다면, 방향을 플레이어 쪽으로 설정한다.
+        else
+        {
+            // 방향 계산을 한번만 실행
+            dir = player.transform.position - transform.position;
+            dir.Normalize();
+        }
     }
 
     void Update()

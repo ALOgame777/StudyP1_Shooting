@@ -120,3 +120,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   player: {fileID: 0}
+  downrate: 50
