@@ -718,32 +718,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1861650627461356678, guid: f8c8aca48e95a5144b2a14b80d162333, type: 3}
-      propertyPath: m_Volume
-      value: 0.409
-      objectReference: {fileID: 0}
-    - target: {fileID: 1861650627461356678, guid: f8c8aca48e95a5144b2a14b80d162333, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 5822acddbeb11424a9887d6096c9956b, type: 3}
-    - target: {fileID: 1861650627461356678, guid: f8c8aca48e95a5144b2a14b80d162333, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5695193518712923025, guid: f8c8aca48e95a5144b2a14b80d162333, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 8148604854358730374}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8c8aca48e95a5144b2a14b80d162333, type: 3}
---- !u!82 &8148604854358730374 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1861650627461356678, guid: f8c8aca48e95a5144b2a14b80d162333, type: 3}
-  m_PrefabInstance: {fileID: 8148604854358730373}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

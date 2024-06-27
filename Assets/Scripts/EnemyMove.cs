@@ -13,6 +13,7 @@ public class EnemyMove : MonoBehaviour
     public GameObject player;
     public int downrate = 35; //65% 확률로 플레이어를 쫓아감
     Vector3 dir;
+
     void Start()
     {
         #region Find("Player")
@@ -29,11 +30,12 @@ public class EnemyMove : MonoBehaviour
         // player = playerComp.gameObject;
         #endregion
 
+        // 태그가 같은 팀이면 데미지 x, 다르면 데미지 o 
         #region GameObject.FindGameObjectWithTag("MyPlayer");
         // 3. 게임 오브젝트에 설정된 태그 이름으로 게임 오브젝트를 찾는다.
         player = GameObject.FindGameObjectWithTag("MyPlayer");
         #endregion
-
+         
         #region GameObject.FindWithTag("MyPlayer");
         //player = GameObject.FindWithTag("MyPlayer");
         #endregion
@@ -41,16 +43,24 @@ public class EnemyMove : MonoBehaviour
         // 랜덤한 숫자를 하나 뽑는다. 
         int myNumber =  Random.Range(0, 100);
         // 만일, 뽑은 숫자가 35보다 작으면, 방향을 아래로 설정한다.
-        if(myNumber > downrate)
+        if(myNumber < downrate)
         {
             dir = Vector3.down;
         }
         // 그렇지 않다면, 방향을 플레이어 쪽으로 설정한다.
         else
         {
-            // 방향 계산을 한번만 실행
-            dir = player.transform.position - transform.position;
-            dir.Normalize();
+            // 만일 플레이어가 있다면
+            if(player != null)
+            {
+                // 플레이어를 향한 방향
+                dir = player.transform.position - transform.position;
+                dir.Normalize();
+            }
+            else
+            {
+                dir = Vector3.down;
+            }
         }
     }
 
@@ -67,4 +77,16 @@ public class EnemyMove : MonoBehaviour
         // p = p0 + vt
         transform.position += dir * speed * Time.deltaTime;
     }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        // 충돌한 대상이 플레이어라면
+        if( other.gameObject.name == "Player")
+        {
+            // 플레이어를 제거하고
+            Destroy(other.gameObject);
+            // 나도 제거한다.
+            Destroy(gameObject);
+        }   
+    }  
 }

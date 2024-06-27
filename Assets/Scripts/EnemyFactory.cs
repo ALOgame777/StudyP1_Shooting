@@ -19,8 +19,16 @@ public class EnemyFactory : MonoBehaviour
     // 지정 시간, 에너미 프리팹, 경과된 시간
     void Start()
     {
+        // Invoke 함수를 이용한 타이머 기능
+        // 1회용 타이머
+        // Invoke()
+
+        //Invoke("InvokeTest", 2.5f);
+        //InvokeRepeating("InvokeTest", 3.0f, 1.0f);
+        // Invoke 함수는 매개변수가 없는 함수만 사용 가능하다.
         
     }
+
 
     void Update()
     {
@@ -34,6 +42,7 @@ public class EnemyFactory : MonoBehaviour
             // 경과 시간을 다시 0으로 초기화한다.
             currentTime = 0;
         }
+
 
         #region 타이머 함수 사용
         //타이머 3,2,1 함수 사용
@@ -80,6 +89,10 @@ public class EnemyFactory : MonoBehaviour
         //}
         #endregion
 
+    }
+    void InvokeTest()
+    {
+        print("인보크 기능 실시!");
     }
 
 }
