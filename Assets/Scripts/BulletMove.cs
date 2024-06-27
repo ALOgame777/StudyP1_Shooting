@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletMove : MonoBehaviour
@@ -7,6 +8,8 @@ public class BulletMove : MonoBehaviour
     public float speed;
 
     public GameObject player;
+
+    public float lifeSpan = 3.0f;
 
     void Start()
     {
@@ -27,7 +30,16 @@ public class BulletMove : MonoBehaviour
 
         transform.position += localDir * speed * Time.deltaTime;
         //transform.position += new Vector3(0, 1, 0) * speed * Time.deltaTime;
+        
+        // 라이프 span이 3초가 되면 삭제
+        lifeSpan -= Time.deltaTime;
+        if (lifeSpan <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
+
+    
 
     // 물리적 충돌이 발생했을 때 실행되는 이벤트 함수
     private void OnCollisionEnter(Collision collision)

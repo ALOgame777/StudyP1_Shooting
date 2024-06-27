@@ -81,12 +81,12 @@ public class EnemyMove : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 충돌한 대상이 플레이어라면
-        if( other.gameObject.name == "Player")
+        if (other.gameObject.name == "Player")
         {
             // 플레이어를 제거하고
             Destroy(other.gameObject);
-            // 나도 제거한다.
-            Destroy(gameObject);
-        }   
+        }    
+        // 나도 제거한다.
+        Destroy(gameObject);
     }  
 }
