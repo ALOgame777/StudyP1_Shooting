@@ -13,6 +13,7 @@ public class EnemyMove : MonoBehaviour
     public GameObject player;
     public int downrate = 35; //65% 확률로 플레이어를 쫓아감
     Vector3 dir;
+    //public GameObject explosionPrefab;
 
     void Start()
     {
@@ -88,5 +89,16 @@ public class EnemyMove : MonoBehaviour
         }    
         // 나도 제거한다.
         Destroy(gameObject);
-    }  
+    }
+
+    // 삭제되는 순간에 호출되는 이벤트 함수
+    //private void OnDestroy()
+    //{
+    //    // 메모리 상에 존재(부유 상태)
+
+    //    // 폭발 효과 오브젝트를 나의 위치에 생성한다.
+    //    GameObject explosion = Instantiate(explosionPrefab, transform.position , transform.rotation);
+    //    ParticleSystem fx = explosion.GetComponent<ParticleSystem>();
+    //    fx.Play();
+    //}
 }

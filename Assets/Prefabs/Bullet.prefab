@@ -120,6 +120,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  player: {fileID: 0}
+  lifeSpan: 3
+  explosionPrefab: {fileID: 8194992990867289339, guid: 14e788e4624624149a5850e4f0c31125, type: 3}
 --- !u!54 &-6105621565149988633
 Rigidbody:
   m_ObjectHideFlags: 0

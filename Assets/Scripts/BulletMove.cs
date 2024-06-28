@@ -11,6 +11,8 @@ public class BulletMove : MonoBehaviour
 
     public float lifeSpan = 3.0f;
 
+    public GameObject explosionPrefab;
+
     void Start()
     {
         
@@ -23,7 +25,7 @@ public class BulletMove : MonoBehaviour
         //이동 공식 : p = p0+vt , p += vt
         
         // 월드 방향
-        Vector3 worldDir = Vector3.up;
+        //Vector3 worldDir = Vector3.up;
 
         // 로컬 방향(나를 기준)
         Vector3 localDir = transform.up;
@@ -46,7 +48,7 @@ public class BulletMove : MonoBehaviour
     {
         // 충돌한 게임 오브젝트를 제거한다.
         Destroy(collision.gameObject);
-
+        
         // 나를 제거한다.
         Destroy(gameObject);
 
@@ -62,15 +64,28 @@ public class BulletMove : MonoBehaviour
         if(enemy != null)
         {
             Destroy(col.gameObject);
+
+            // 폭발 이펙트 프리팹를 에너미가 있던 자리에 생성한다.
+            GameObject explosion = Instantiate(explosionPrefab, col.transform.position, col.transform.rotation);
+            //GameObject fx = Instantiate(explosionPrefab, col.transform.position, col.transform.rotation);
             
+            // 생성한 폭발 이펙트 오브젝트에서 파티클 시스템 컴포넌트를 가져와서 플레이한다.
+            
+            //ParticleSystem ps = fx.GetComponent<ParticleSystem>();
+            ParticleSystem fx = explosion.GetComponent<ParticleSystem>();
+            fx.Play();
+            // ps.Play();
             // 플레이어 게임 오브젝트에 붙어있는 PlayerFire 컴포넌트를 가져온다.
             PlayerFire playerFire = player.GetComponent<PlayerFire>();
-            
+
             // PlayerFire 컴포넌트에 있는 PlayExplosionSound 함수를 실행한다.
             playerFire.PlayExplosionSound();
         }
 
         // 나를 제거한다.
         Destroy(gameObject);
+        
     }
+
+
 }
