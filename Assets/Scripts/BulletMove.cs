@@ -25,7 +25,7 @@ public class BulletMove : MonoBehaviour
         //이동 공식 : p = p0+vt , p += vt
         
         // 월드 방향
-        //Vector3 worldDir = Vector3.up;
+        Vector3 worldDir = Vector3.up;
 
         // 로컬 방향(나를 기준)
         Vector3 localDir = transform.up;
