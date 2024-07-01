@@ -140,6 +140,9 @@ MonoBehaviour:
   sounds:
   - {fileID: 8300000, guid: 5822acddbeb11424a9887d6096c9956b, type: 3}
   - {fileID: 8300000, guid: ce8a061b3fdd0c041826a93483723305, type: 3}
+  bullets: []
+  bulletCount: 20
+  useObjectPool: 1
 --- !u!82 &1861650627461356678
 AudioSource:
   m_ObjectHideFlags: 0
