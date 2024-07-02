@@ -10,7 +10,7 @@ public class PlayerFire : MonoBehaviour
 
     public AudioClip[] sounds;
     public AudioSource audioSource;
-    int bulletNumber = 0;
+    public int bulletNumber = 0;
 
     // 리스트
     public List<GameObject> bullets = new List<GameObject>();
@@ -36,6 +36,10 @@ public class PlayerFire : MonoBehaviour
                 go.GetComponent<BulletMove>().player = gameObject;
                 // 생성된 총알을 비활성화한다.
                 go.SetActive(false);
+
+                // 생성된 퐁알을 플레이어의 자식 오브젝트로 등록한다.
+                go.transform.parent = transform;
+
             }
         }
 
@@ -50,6 +54,10 @@ public class PlayerFire : MonoBehaviour
                 bulletArray[i] = go;
                 go.SetActive(false);
                 go.GetComponent <BulletMove>().player = gameObject;
+
+                // 생성된 퐁알을 플레이어의 자식 오브젝트로 등록한다.
+                go.transform.parent = transform;
+
             }
 
         }
@@ -107,9 +115,7 @@ public class PlayerFire : MonoBehaviour
             // 총알 발사음을 실행한다.
         
             audioSource.clip = sounds[0];
-        
             audioSource.volume = 0.2f;
-        
             audioSource.Play();
         
             //audioSource.Stop();
@@ -143,8 +149,11 @@ public class PlayerFire : MonoBehaviour
             // 활성화된 총알 오브젝트의 위치 및 회전을 총구와 일치 시킨다.
             bullets[0].transform.position = firePosition.transform.position;
             bullets[0].transform.rotation = firePosition.transform.rotation;
+            
+            // 활성화된 총알을 자식 오브젝트에서 해제한다.
+            bullets[0].transform.parent = null;
+
             // 0번 인덱스의 총알을 탄창 리스트에서 제거한다.
-            bullets[0].GetComponent<BulletMove>().player = gameObject;
             bullets.RemoveAt(0);
         }
         void ObjectPoolArray()
@@ -161,6 +170,8 @@ public class PlayerFire : MonoBehaviour
                         bulletArray[i].transform.position = firePosition.transform.position;
                         bulletArray[i].transform.rotation = firePosition.transform.rotation;
 
+                        // 활성화된 총알을 자식 오브젝트에서 해제한다.
+                        bulletArray[i].transform.parent = null;
                         //배열에서 해당 총알을 제거한다
                         bulletArray[i] = null;
                         break;
@@ -177,7 +188,8 @@ public class PlayerFire : MonoBehaviour
         public void PlayExplosionSound()
         {
             audioSource.clip = sounds[1];
+            audioSource.volume = 1.0f;
             audioSource.Play();
         }
-   }
+}
 
