@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,11 @@ public class PlayerMove : MonoBehaviour
 {
     //플레이어를 원하는 방향으로 이동한다.
     public float moveSpeed = 0.1f;
-
+    public float rotSpeed = 100f;
     //private Vector3 direction;
+
+    float rotY;
+    Animator myAnim;
 
     #region 속도란?
     // 방향, 속력 = 속도(Vector)
@@ -49,7 +53,8 @@ public class PlayerMove : MonoBehaviour
     // 처음 생성되었을 때 한 번만 실행되는 함수
     void Start()
     {
-
+        // 나에게 붙어있는 Animator 컴포넌트 가져오기
+        myAnim = GetComponent<Animator>();
     }
 
 
@@ -73,6 +78,59 @@ public class PlayerMove : MonoBehaviour
         //transform.eulerAngles += direction * moveSpeed * Time.deltaTime;
         //transform.localScale += direction * moveSpeed * Time.deltaTime;
 
+        // 기체의 회전 : r = r0 +vt
+        rotY += (h * -1) * rotSpeed * Time.deltaTime;
+        transform.eulerAngles = new Vector3(0, rotY, 0);
+
+        float inputH = MathF.Abs(h);
+        // 만일, 사용자의 좌우 입력이 없다면
+        if(inputH < 0.1f)
+        {
+
+            // 기체의 회전값을 다시 원래대로 돌려놓는다.
+            //transform.eulerAngles = Vector3.zero;
+            #region 오일러 앵글 직접 사용하는 방법
+            // 1. 오일러 앵글을 직접 사용하는 방법
+            //if (MathF.Abs(transform.eulerAngles.y) > 1.0f)
+            //{
+            //    if (transform.eulerAngles.y < 0)
+            //    {
+            //        rotY += rotSpeed * Time.deltaTime;
+            //    }
+            //    else
+            //    {
+            //        rotY -= rotSpeed * Time.deltaTime;
+            //    }
+            //    transform.eulerAngles += new Vector3(0, rotY, 0);
+            //}
+            //else
+            //{
+            //    transform.eulerAngles = Vector3.zero;
+            //}
+            #endregion
+
+            //2.  Lerp를 이용한 방법
+            rotY = Mathf.Lerp(rotY, 0, Time.deltaTime);
+            transform.eulerAngles = new Vector3(0, rotY, 0);
+
+
+        }
+        #region 애니메이터를 사용한 회전 애니메이션 주기
+        // 애니메이터를 사용한 회전 애니메이션 주기
+        //if (h > 0.2f)
+        //{
+        //    myAnim.SetTrigger("RightMove");
+        //}
+        //else if (h < -0.2f)
+        //{
+        //    myAnim.SetTrigger("LeftMove");
+        //}
+        //else
+        //{
+        //    myAnim.SetTrigger("Idle");
+        //}
+        #endregion
+
         #region 사용자의 키 입력
         // 특정 키를 입력했을 때 사용하는 함수(Get, GetDown, GetUp)
         //bool value = Input.GetButton("Horizontal");
@@ -82,6 +140,6 @@ public class PlayerMove : MonoBehaviour
         //    print("F1 키를 눌렀습니다.");
         //}
         #endregion
-        
+
     }
 }
