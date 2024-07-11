@@ -162,6 +162,7 @@ public class PlayerFire : MonoBehaviour
             {
                 if(bulletArray[i] != null)
                 {
+                    // 해당 인덱스의 총알 오브젝트가 활성화 상태인지를 확인한다.
                     if (!bulletArray[i].activeInHierarchy)
                     {
                         //bulletNumber 변수 값에 해당하는 인덱스의 오브젝트를 활성화한다.
